@@ -1,7 +1,20 @@
 declare module 'ds/components' {
-  const Card: React.FC<{
-    title: string;
-    text: string;
+  type IconVariantType = 'add' | 'edit' | 'delete' | 'menu'
+
+  const Button: React.FC<{
+    icon?: IconVariantType;
+    onClick: () => void;
   }>;
-  export { Card };
+
+  const Card: React.FC<{
+    clientName: string;
+    clientWage: number;
+    companyValue: number;
+  }>;
+
+  const Icon: React.FC<{
+    variant: IconVariantType;
+  }>;
+
+  export { Button, Card, Icon };
 }

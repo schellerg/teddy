@@ -10,7 +10,7 @@ export default defineConfig({
     tailwindcss(),
     tsconfigPaths(),
     federation({
-      name: 'ds',
+      name: 'designSystem',
       filename: 'remoteEntry.js',
       exposes: {
         './components': './src/components',
