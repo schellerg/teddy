@@ -1,6 +1,6 @@
 import './App.css'
 
-import Card from 'ds/components/Card'
+import { Card } from 'ds/components'
 
 function App() {
   return (
