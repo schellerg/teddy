@@ -1,5 +1,5 @@
 import './index.css'
-import { Card, Input, Navigation } from 'components'
+import { Card, Input, Navigation, Pagination } from 'components'
 
 function App() {
   return (
@@ -23,6 +23,14 @@ function App() {
             { label: 'Sair', onClick: () => alert('Contato Clicked!') }
           ]
         } />
+      </div>
+
+      <div className='flex justify-center m-4'>
+        <Pagination
+          totalPages={12}
+          currentPage={4}
+          onPageChange={(page) => alert(`Page changed to ${page}`)}
+        />
       </div>
     </>
   )
