@@ -1,10 +1,9 @@
 import clsx from 'clsx'
-import type { IconVariantType } from 'components/Icon/Icon'
-import Icon from 'components/Icon/Icon'
+import type { LucideIcon } from 'lucide-react'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string
-  icon?: IconVariantType
+  icon?: LucideIcon
   iconPosition?: 'left' | 'right'
   variant?: 'outline' | 'filled'
   onClick?: () => void
@@ -19,14 +18,17 @@ const variantMapping = {
 const Button: React.FC<ButtonProps> = ({ icon, iconPosition = 'left', label, variant = 'outline', onClick, ...rest }) => {
   const iconStyle = variantMapping[!label && icon ? 'icon' : variant]
   const iconIsRight = iconPosition === 'right'
-  const iconPositionClass = iconIsRight ? 'flex-row-reverse' : 'flex-row'
-  const iconMargin = !label && iconIsRight ? 'mr-2' : 'ml-2'
 
   return (
-    <button className={clsx('flex items-center justify-center p-1.5 text-bold rounded-sm cursor-pointer', iconStyle, iconPositionClass)} onClick={onClick} {...rest}>
-      {icon && <Icon variant={icon} />}
-      {label && <span className={icon && iconMargin}>{label}</span>}
-    </button>
+    <button className={clsx(
+      'flex items-center justify-center p-1.5 text-bold rounded-sm cursor-pointer',
+      iconStyle,
+      iconIsRight ? 'flex-row-reverse' : 'flex-row',
+    )}
+      onClick={onClick} {...rest}>
+      {icon && icon}
+      {label && <span className={clsx(iconIsRight ? 'mr-2' : 'ml-2')}>{label}</span>}
+    </button >
   )
 }
 

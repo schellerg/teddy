@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react"
 
-import Icon from "components/Icon"
+import { X } from "lucide-react"
 
 interface ModalProps {
   title: string
@@ -55,7 +55,9 @@ const Modal: React.FC<ModalProps> = ({
       <>
         <header className="flex items-center justify-between mb-3">
           <p className="font-bold">{title}</p>
-          <Icon variant="close" onClick={handleClose} />
+          <a className='cursor-pointer' title='Fechar modal' onClick={handleClose}>
+            <X size={20} />
+          </a>
         </header>
         {children}
       </>
