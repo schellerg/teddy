@@ -12,20 +12,20 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
 
 const variantMapping = {
   outline: 'bg-transparent border-2 text-orange border-orange',
-  filled: 'bg-orange text-white',
+  filled: 'bg-orange text-white hover:bg-black',
   icon: 'bg-transparent p-0!'
 }
 
-const Button = ({ icon, iconPosition = 'left', label, variant = 'outline', onClick, ...rest }: ButtonProps) => {
+const Button: React.FC<ButtonProps> = ({ icon, iconPosition = 'left', label, variant = 'outline', onClick, ...rest }) => {
   const iconStyle = variantMapping[!label && icon ? 'icon' : variant]
   const iconIsRight = iconPosition === 'right'
   const iconPositionClass = iconIsRight ? 'flex-row-reverse' : 'flex-row'
   const iconMargin = !label && iconIsRight ? 'mr-2' : 'ml-2'
 
   return (
-    <button className={clsx('flex p-1.5 text-bold text-center rounded-sm cursor-pointer', iconStyle, iconPositionClass)} onClick={onClick} {...rest}>
+    <button className={clsx('flex items-center justify-center p-1.5 text-bold rounded-sm cursor-pointer', iconStyle, iconPositionClass)} onClick={onClick} {...rest}>
       {icon && <Icon variant={icon} />}
-      {label && <span className={iconMargin}>{label}</span>}
+      {label && <span className={icon && iconMargin}>{label}</span>}
     </button>
   )
 }

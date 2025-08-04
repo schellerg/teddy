@@ -7,7 +7,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputSize?: 'medium' | 'large'
 }
 
-const Input: React.FC<InputProps> = ({ inputSize = 'medium', ...props }: InputProps) => {
+const Input: React.FC<InputProps> = ({ inputSize = 'medium', ...props }) => {
   return (
     <fieldset>
       <input

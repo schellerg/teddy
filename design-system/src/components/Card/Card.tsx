@@ -1,5 +1,6 @@
 import { formatMoney } from "@utils/formatMoney"
 import Button from "components/Button/Button"
+import type React from "react"
 
 interface CardProps {
   clientName: string
@@ -7,12 +8,12 @@ interface CardProps {
   companyValue: number
 }
 
-const Card = (props: CardProps) => {
+const Card: React.FC<CardProps> = ({ clientName, clientWage, companyValue }) => {
   return (
     <div className="text-center p-4 rounded-sm bg-white shadow-custom">
-      <h3 className="font-bold text-black">{props.clientName}</h3>
-      <p className="text-black">Salário: {formatMoney(props.clientWage)}</p>
-      <p className="text-black">Empresa: {formatMoney(props.companyValue)}</p>
+      <h3 className="font-bold text-black">{clientName}</h3>
+      <p className="text-black">Salário: {formatMoney(clientWage)}</p>
+      <p className="text-black">Empresa: {formatMoney(companyValue)}</p>
 
       <div className="flex justify-between mt-4">
         <Button icon="add" onClick={() => alert('Button Clicked!')} />

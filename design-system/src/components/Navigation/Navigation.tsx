@@ -1,8 +1,10 @@
+import clsx from "clsx"
 import type React from "react"
 
 interface NavigationItemProps {
   label: string
   title?: string
+  href?: string
   onClick?: () => void
 }
 
@@ -10,15 +12,22 @@ interface NavigationProps extends React.HTMLAttributes<HTMLElement> {
   items: NavigationItemProps[]
 }
 
-const Navigation: React.FC<NavigationProps> = (props: NavigationProps) => {
+const Navigation: React.FC<NavigationProps> = ({ items }) => {
+  const currentRoute = '/clientes' // This should be dynamically set based on the current route in a real application
+
   return (
     <nav>
       <ul className="flex space-x-4">
-        {props.items.map((item) => (
+        {items.map((item) => (
           <li key={item.label}>
             <a
               title={item.title ?? item.label}
-              className="text-black cursor-pointer hover:text-orange"
+              className={
+                clsx(
+                  "text-black cursor-pointer hover:text-orange",
+                  { "text-orange underline": item.href === currentRoute },
+                )
+              }
               onClick={item.onClick}
             >
               {item.label}
