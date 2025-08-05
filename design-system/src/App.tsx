@@ -14,9 +14,10 @@ function App() {
       <div className='max-w-7xl mx-auto'>
         <header className='p-4'>
           <div className='flex justify-between'>
-            <Button icon={<MenuIcon size={20} />} onClick={() => setMenuOpen(true)} />
+            <Button icon={<MenuIcon />} onClick={() => setMenuOpen(true)} />
           </div>
         </header>
+
 
         <Menu
           isMenuOpen={menuOpen}

@@ -3,7 +3,7 @@ import type { LucideIcon } from 'lucide-react'
 
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   label?: string
-  icon?: LucideIcon
+  icon?: React.ReactElement<LucideIcon>
   iconPosition?: 'left' | 'right'
   variant?: 'outline' | 'filled'
   onClick?: () => void
