@@ -24,11 +24,15 @@
     "noUncheckedSideEffectImports": true,
 
     /* Alias */
-    "baseUrl": "src",
+    "baseUrl": "./src",
     "paths": {
-      "@components": ["./components/*"],
-      "@pages": ["./pages/*"],
-      "@utils/*": ["./utils/*"]
+      "@api/*": ["api/*"],
+      "@components/*": ["components/*"],
+      "@contexts/*": ["contexts/*"],
+      "@hooks/*": ["hooks/*"],
+      "@pages/*": ["pages/*"],
+      "@providers/*": ["providers/*"],
+      "@utils/*": ["utils/*"]
     }
   },
   "include": ["src"]

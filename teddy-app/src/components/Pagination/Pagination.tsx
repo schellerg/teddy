@@ -35,7 +35,7 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage }) => {
   const pages = formatPagination(totalPages || 1, currentPage || 1)
 
   return (
-    <nav className="mt-5">
+    <nav className="my-5">
       <ol className="flex space-x-1 font-bold text-sm">
         {
           pages.map((page, index) => {

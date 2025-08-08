@@ -1,5 +1,22 @@
 import type { LucideIcon } from 'lucide-react'
 
+export interface ApiListUsersParams {
+  page?: number
+  limit?: number
+}
+
+export interface ApiUser {
+  id: number
+  name: string
+  salary: number
+  companyValuation: number
+}
+export interface ApiListUsers {
+  clients: Client[]
+  currentPage: number
+  totalPages: number
+}
+
 export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   fullWidth?: boolean
   label?: string
@@ -10,10 +27,15 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   onClick?: () => void
 }
 
-export interface CardProps {
-  clientName: string
-  clientWage: number
-  companyValue: number
+export interface Client {
+  id: number
+  name: string
+  salary: number
+  companyEvaluation: number
+}
+
+export interface ClientsList {
+  items: Client[]
 }
 
 export interface ClientModalFormData {
@@ -24,10 +46,17 @@ export interface ClientModalFormData {
 
 export const ClientModalFormType = {
   CREATE: "CREATE",
+  DELETE: "DELETE",
   EDIT: "EDIT"
 } as const
 
 export type ClientModalFormType = typeof ClientModalFormType[keyof typeof ClientModalFormType]
+
+export interface ClientModalFormProps {
+  formType: ClientModalFormType,
+  formData: ClientModalFormData,
+  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
 
 export interface ClientModalProps {
   isOpen: boolean

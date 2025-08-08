@@ -2,16 +2,19 @@ import React, { useState } from "react"
 import { ClientModalFormType } from "@utils/types"
 import type { ClientModalFormData, ClientModalProps } from "@utils/types"
 
-import { Button, Input, Modal } from "@components"
+import { Button, Modal } from "@components"
+import ClientModalForm from "./ClientModalForm"
 
 const ClientModal: React.FC<ClientModalProps> = ({ isOpen, setIsOpen, formType }) => {
-  const [formData, setFormData] = useState<ClientModalFormData>({
+  const defaultState = {
     clientName: { error: false, value: '' },
     clientWage: { error: false, value: '' },
     companyValue: { error: false, value: '' },
-  })
+  }
 
-  const defaultText = formType === ClientModalFormType.CREATE ? "Criar" : "Editar"
+  const [formData, setFormData] = useState<ClientModalFormData>(defaultState)
+
+  const defaultText = `${formType === ClientModalFormType.CREATE ? "Criar" : formType === ClientModalFormType.EDIT ? "Editar" : "Excluir"} cliente`
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target
@@ -21,47 +24,27 @@ const ClientModal: React.FC<ClientModalProps> = ({ isOpen, setIsOpen, formType }
     }))
   }
 
+  const handleClose = () => {
+    setFormData(defaultState)
+    setIsOpen(false)
+  }
+
   return (
     <Modal
       // key={`${ClientModalFormType}-${1}`}
       isOpen={isOpen}
-      title={`${defaultText} cliente`}
-      onClose={() => setIsOpen(false)}>
-      <div className="flex w-[360px] max-w-full">
-        <form className='flex flex-col w-full gap-3' method="POST">
-          <Input
-            error={formData.clientName.error}
-            name='clientName'
-            id='clientName'
-            maxLength={50}
-            placeholder='Digite o nome:'
-            required
-            value={formData.clientName.value}
-            onChange={handleChange}
-          />
-          <Input
-            error={formData.clientWage.error}
-            name='clientWage'
-            id='clientWage'
-            maxLength={14}
-            placeholder='Digite o salário:'
-            required type='tel'
-            value={formData.clientWage.value}
-            onChange={handleChange}
-          />
-          <Input
-            error={formData.companyValue.error}
-            name='companyValue'
-            id='companyValue'
-            maxLength={14}
-            placeholder='Digite o valor da empresa:'
-            required
-            type='tel'
-            value={formData.companyValue.value}
-            onChange={handleChange}
-          />
-          <Button label={`${defaultText} cliente`} variant='filled' />
-        </form>
+      title={defaultText}
+      onClose={() => handleClose()}>
+      <div className="flex w-[360px] flex-col max-w-full gap-4">
+        {formType === ClientModalFormType.DELETE &&
+          <>
+            <p className="text-left">Você está prestes a excluir o cliente: <span className="font-bold">{formData.clientName.value}</span></p>
+            <Button fullWidth label={defaultText} variant="filled" onClick={() => { }} />
+          </>
+        }
+        {formType !== ClientModalFormType.DELETE &&
+          <ClientModalForm formType={formType} formData={formData} handleChange={handleChange} />
+        }
       </div>
     </Modal>
   )

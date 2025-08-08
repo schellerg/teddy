@@ -1,57 +1,67 @@
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
+import { useClients } from "@hooks"
 
-import { Button, Card, ClientModal, Container, Header, Pagination } from "@components"
+import { Button, ClientModal, ClientsList, Container, ErrorMessage, Header, Pagination } from "@components"
 import { ClientModalFormType } from "@utils/types"
 
 const Clients = () => {
   const [openClientModal, setOpenClientModal] = useState<boolean>(false)
   const [clientModalType, setClientModalType] = useState<ClientModalFormType>(ClientModalFormType.CREATE)
 
+  const [page, setPage] = useState<number>(1)
+  const [limit, setLimit] = useState<number>(16)
+
+  const params = useMemo(() => ({ page, limit }), [page, limit])
+
+  const { users, totalPages, loading, error } = useClients(params)
+
+  if (!loading && error)
+    return <ErrorMessage message={error} />
+
+  if (loading)
+    return <p>Carregando...</p>
+
   return (
     <>
       <Header />
 
       <Container className="flex-col mt-8">
-        <div className="flex justify-between w-full">
-          <p><span className="font-bold">16</span> clientes encontrados:</p>
-          <form>
-            <label className="cursor-pointer" htmlFor="page-offset">Clientes por página:</label>
-            <select id="page-offset" name="page-offset">
-              <option>16</option>
-              <option>32</option>
-              <option>64</option>
-            </select>
-          </form>
-        </div>
+        <>
+          <div className="flex flex-wrap justify-between w-full text-sm lg:text-[18px]">
+            <p><span className="font-bold">{users.length}</span> clientes encontrados:</p>
+            <form>
+              <label className="cursor-pointer" htmlFor="page-offset">Clientes por página:</label>
+              <select id="page-offset" name="page-offset">
+                <option>16</option>
+                <option>32</option>
+                <option>64</option>
+              </select>
+            </form>
+          </div>
 
-        <ul className="grid grid-cols-2 sm:grid-cols-4 w-full gap-5 mt-3 mb-5">
-          {
-            [...Array(16).keys()].map(
-              key => <Card key={key} clientName='Rhys Strongfork' clientWage={150000} companyValue={20000000} />
-            )
-          }
-        </ul>
+          <ClientsList items={users} />
 
-        <Button
-          fullWidth
-          label="Criar cliente"
-          onClick={() => {
-            setOpenClientModal(true)
-            setClientModalType(ClientModalFormType.CREATE)
-          }}
-        />
+          <Button
+            fullWidth
+            label="Criar cliente"
+            onClick={() => {
+              setOpenClientModal(true)
+              setClientModalType(ClientModalFormType.CREATE)
+            }}
+          />
 
-        <Pagination
-          totalPages={12}
-          currentPage={4}
-          onPageChange={() => { }}
-        />
+          <Pagination
+            totalPages={totalPages}
+            currentPage={page}
+            onPageChange={() => { }}
+          />
 
-        <ClientModal
-          isOpen={openClientModal}
-          setIsOpen={setOpenClientModal}
-          formType={clientModalType}
-        />
+          <ClientModal
+            isOpen={openClientModal}
+            setIsOpen={setOpenClientModal}
+            formType={clientModalType}
+          />
+        </>
       </Container>
     </>
   )

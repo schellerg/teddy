@@ -45,18 +45,18 @@ const Header = () => {
 
   return (
     <>
-      <header className="py-6 shadow-custom-sm">
-        <Container className="justify-between">
+      <header className="py-3 sm:py-6 shadow-custom-sm">
+        <Container className="lg:justify-between">
           <Button icon={<MenuIcon />} onClick={() => setMenuOpen(true)} />
 
-          <img src="/images/logo-teddy.png" width={100} alt="Logo Teddy" />
+          <img className="ml-2 w-20 sm:w-24 lg:mr-auto" src="/images/logo-teddy.png" alt="Logo Teddy" />
 
           <Navigation
-            items={navItems}
+            items={navItems.filter(item => item.label !== "Home")}
           />
 
           {username &&
-            <div className="">
+            <div className="ml-auto text-xs sm:text-base">
               Olá, <span className="font-bold">{username}</span>!
             </div>
           }

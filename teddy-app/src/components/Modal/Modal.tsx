@@ -34,23 +34,24 @@ const Modal: React.FC<ModalProps> = ({
     return modal.close()
   }, [isOpen])
 
-  return (
-    <dialog
-      ref={modalRef}
-      className="open:fixed open:flex flex-col inset-0 lg:max-w-max m-auto p-4 bg-white rounded-sm z-50 backdrop:opacity-30 backdrop:bg-black"
-      onKeyDown={handleEscape}
-    >
-      <>
-        <header className="flex items-center justify-between mb-3">
-          <p className="font-bold">{title}</p>
-          <a className='cursor-pointer' title='Fechar modal' onClick={handleClose}>
-            <X size={20} />
-          </a>
-        </header>
-        {children}
-      </>
-    </dialog>
-  )
+  if (isOpen)
+    return (
+      <dialog
+        ref={modalRef}
+        className="open:fixed open:flex flex-col inset-0 lg:max-w-max m-auto p-4 bg-white rounded-sm z-50 backdrop:opacity-30 backdrop:bg-black"
+        onKeyDown={handleEscape}
+      >
+        <>
+          <header className="flex items-center justify-between mb-3">
+            <p className="font-bold">{title}</p>
+            <a className='cursor-pointer' title='Fechar modal' onClick={handleClose}>
+              <X size={20} />
+            </a>
+          </header>
+          {children}
+        </>
+      </dialog>
+    )
 }
 
 export default Modal

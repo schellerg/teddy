@@ -8,7 +8,7 @@ const Navigation: React.FC<NavigationProps> = ({ items }) => {
 
   return (
     <nav>
-      <ul className="flex space-x-4">
+      <ul className="hidden lg:flex space-x-4">
         {items.map((item) => (
           <li key={item.label}>
             <a
