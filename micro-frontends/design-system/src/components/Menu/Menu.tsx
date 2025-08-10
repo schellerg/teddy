@@ -12,11 +12,12 @@ interface MenuItemProps {
 
 interface MenuProps {
   isMenuOpen: boolean
+  currentPage?: string
   items: MenuItemProps[]
   onClose: () => void
 }
 
-const Menu: React.FC<MenuProps> = ({ items, isMenuOpen, onClose }) => {
+const Menu: React.FC<MenuProps> = ({ items, isMenuOpen, currentPage, onClose }) => {
   const [isOpen, setIsOpen] = useState(isMenuOpen)
 
   const handleClose = () => {
@@ -44,7 +45,11 @@ const Menu: React.FC<MenuProps> = ({ items, isMenuOpen, onClose }) => {
             items.map((item) => {
               return (
                 <li key={item.label} className='flex'>
-                  <a className='flex items-center font-medium text-base cursor-pointer hover:text-orange' title={item.label} onClick={item.onClick}>
+                  <a className={clsx(
+                    'flex items-center font-medium text-base cursor-pointer hover:text-orange',
+                    { 'text-orange': item.href && currentPage && currentPage === item.href },
+                  )}
+                    title={item.label} onClick={item.onClick}>
                     {item.Icon && <item.Icon size={20} />}
                     <span className={clsx({ 'ml-2': item.Icon })}>{item.label}</span>
                   </a>

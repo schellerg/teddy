@@ -31,11 +31,13 @@ export interface Client {
   id: number
   name: string
   salary: number
-  companyEvaluation: number
+  companyValuation: number
 }
 
 export interface ClientsList {
   items: Client[]
+  loading?: boolean
+  error?: Error | null
 }
 
 export interface ClientModalFormData {

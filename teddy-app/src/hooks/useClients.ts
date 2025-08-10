@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import { useCallback, useEffect, useState } from "react"
 
 import { listUsers } from "@api"
 import type { ApiListUsers, ApiListUsersParams } from "@utils/types"
@@ -9,24 +9,24 @@ const useClients = (params: ApiListUsersParams) => {
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<Error | null>(null)
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const res = await listUsers(params)
-        setUsers(res.clients)
-        setTotalPages(res.totalPages)
-        setError(null)
-      } catch (error) {
-        setError(error as Error)
-      } finally {
-        setLoading(false)
-      }
+  const fetchData = useCallback(async () => {
+    try {
+      const res = await listUsers(params)
+      setUsers(res.clients)
+      setTotalPages(res.totalPages)
+      setError(null)
+    } catch (error) {
+      setError(error as Error)
+    } finally {
+      setLoading(false)
     }
-
-    fetchData()
   }, [params])
 
-  return { users, totalPages, loading, error }
+  useEffect(() => {
+    fetchData()
+  }, [fetchData])
+
+  return { users, totalPages, loading, error, refetch: fetchData }
 }
 
 export default useClients

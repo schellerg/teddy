@@ -8,7 +8,7 @@ import { Plus, Pencil, Trash2 } from "lucide-react"
 
 import { type Client, ClientModalFormType } from "@utils/types"
 
-const Card: React.FC<Client> = ({ id, name, salary, companyEvaluation }) => {
+const Card: React.FC<Client> = ({ name, salary, companyValuation }) => {
   const [openClientModal, setOpenClientModal] = useState<boolean>(false)
   const [clientModalType, setClientModalType] = useState<ClientModalFormType>(ClientModalFormType.CREATE)
 
@@ -20,10 +20,10 @@ const Card: React.FC<Client> = ({ id, name, salary, companyEvaluation }) => {
   const iconSize = 18
 
   return (
-    <div key={id} className="text-center p-4 rounded-sm bg-white shadow-custom">
+    <li className="text-center p-4 rounded-sm bg-white shadow-custom">
       <h3 className="font-bold text-black">{name}</h3>
       <p className="text-black">Salário: {formatMoney(salary)}</p>
-      <p className="text-black">Empresa: {formatMoney(companyEvaluation)}</p>
+      <p className="text-black">Empresa: {formatMoney(companyValuation)}</p>
 
       <div className="flex justify-between mt-4">
         <Button icon={<Plus size={iconSize} />} onClick={() => { }} />
@@ -36,7 +36,7 @@ const Card: React.FC<Client> = ({ id, name, salary, companyEvaluation }) => {
         setIsOpen={setOpenClientModal}
         formType={clientModalType}
       />
-    </div>
+    </li>
   )
 }
 

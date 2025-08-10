@@ -7,7 +7,7 @@ interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   inputSize?: 'medium' | 'large'
 }
 
-const Input: React.FC<InputProps> = ({ inputSize = 'medium', ...props }) => {
+const Input: React.FC<InputProps> = ({ inputSize = 'medium', error = 'false', helperText, ...props }) => {
   return (
     <fieldset>
       <input
@@ -18,7 +18,7 @@ const Input: React.FC<InputProps> = ({ inputSize = 'medium', ...props }) => {
               "p-3 text-2xl": inputSize === 'large',
             },
             {
-              "border-red-500": props.error,
+              "border-red-500": error,
             }
           )
         }
@@ -29,8 +29,8 @@ const Input: React.FC<InputProps> = ({ inputSize = 'medium', ...props }) => {
         type={props.type ?? 'text'}
         {...props}
       />
-      {props.error && props.helperText?.length &&
-        <p className="text-red-500">{props.helperText}</p>
+      {error && helperText?.length &&
+        <p className="text-red-500">{helperText}</p>
       }
     </fieldset>
   )

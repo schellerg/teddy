@@ -1,4 +1,4 @@
-import type { ApiListUsers, ApiListUsersParams } from '@utils/types'
+import type { ApiUser, ApiListUsers, ApiListUsersParams } from '@utils/types'
 import axios from 'axios'
 
 const api = axios.create({
@@ -33,6 +33,24 @@ api.interceptors.response.use(
 
 export const listUsers = async (params: ApiListUsersParams): Promise<ApiListUsers> => {
   const response = await api.get("/users", { params })
+
+  return response.data
+}
+
+export const createUser = async (params: ApiUser): Promise<ApiUser> => {
+  const response = await api.post("users", { params })
+
+  return response.data
+}
+
+export const updateUser = async (params: ApiUser) => {
+  const response = await api.patch(`users/${params.id}`)
+
+  return response.data
+}
+
+export const deleteUser = async (id: number) => {
+  const response = await api.delete(`users/${id}`)
 
   return response.data
 }

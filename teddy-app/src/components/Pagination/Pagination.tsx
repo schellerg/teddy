@@ -1,5 +1,6 @@
-import clsx from "clsx"
 import type React from "react"
+
+import clsx from "clsx"
 
 import { type PaginationProps } from "@utils/types"
 
@@ -31,7 +32,7 @@ const formatPagination = (totalPages: number, currentPage: number): Array<number
   return pages
 }
 
-const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage }) => {
+const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage, onPageChange }) => {
   const pages = formatPagination(totalPages || 1, currentPage || 1)
 
   return (
@@ -55,7 +56,13 @@ const Pagination: React.FC<PaginationProps> = ({ totalPages, currentPage }) => {
                 key={isEllipsis ? `ellipsis-${index}` : `page-${page}`}
               >
                 {
-                  isEllipsis ? <span>{page}</span> : <a className={clsx("cursor-pointer", { "hover:text-orange": !activePage })} title={`Página ${page}`}>{page}</a>
+                  isEllipsis ?
+                    <span>{page}</span> :
+                    <a
+                      className={clsx("cursor-pointer", { "hover:text-orange": !activePage })}
+                      title={`Página ${page}`}
+                      onClick={() => onPageChange(page)}
+                    >{page}</a>
                 }
               </li>
             )
