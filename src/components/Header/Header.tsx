@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { useLocation, useNavigate } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Home, MenuIcon, User, UserStar } from "lucide-react"
 
 import { Button, Container, Menu, Navigation } from "@components"
@@ -8,8 +8,6 @@ const Header = () => {
   const [openMenu, setMenuOpen] = useState<boolean>(false)
 
   const navigate = useNavigate()
-  const { pathname } = useLocation()
-
   const username = localStorage.getItem("username")
 
   const logout = () => {
@@ -65,7 +63,6 @@ const Header = () => {
 
       <Menu
         isMenuOpen={openMenu}
-        currentPage={pathname}
         items={navItems}
         onClose={() => setMenuOpen(false)}
       />

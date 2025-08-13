@@ -8,11 +8,9 @@ const useEditClient = () => {
   const [error, setError] = useState<Error | null>(null)
 
   const updateClient = async (params: ApiUser) => {
-    console.log('useEditClient', params)
     try {
       setLoading(true)
-      const res = await updateUser(params)
-      // console.log(res)
+      await updateUser(params)
     } catch (error) {
       setError(error as Error)
     } finally {

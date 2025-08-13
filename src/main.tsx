@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import App from './App.tsx'
 import { Clients, SelectedClients } from "@pages"
-import SelectedClientsProvider from '@providers/SelectedClientsContext.tsx'
+import { SelectedClientsProvider } from "@providers"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

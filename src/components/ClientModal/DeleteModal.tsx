@@ -1,5 +1,5 @@
+import { useDeleteClient } from "@hooks"
 import type { Client } from "@utils/types"
-import useDeleteClient from "@hooks/useDeleteClient"
 import { Button } from "@components"
 
 type Props = {
@@ -11,8 +11,10 @@ const DeleteModal = ({ client, onClose }: Props) => {
   const { deleteClient, loading } = useDeleteClient()
 
   const onSubmit = async () => {
-    await deleteClient(client.id)
-    onClose()
+    if (client.id) {
+      await deleteClient(client.id)
+      onClose()
+    }
   }
 
   return (
@@ -21,7 +23,7 @@ const DeleteModal = ({ client, onClose }: Props) => {
         Você está prestes a excluir o cliente:{" "}
         <span className="font-bold">{client.name}</span>
       </p>
-      <Button fullWidth label="Excluir cliente" loading={loading} variant="filled" onClick={onSubmit} />
+      <Button disabled={loading} fullWidth label="Excluir cliente" variant="filled" onClick={onSubmit} />
     </>)
 }
 

@@ -1,2 +1,5 @@
 export { default as useAddClient } from "./useAddClient"
 export { default as useClients } from "./useClients"
+export { default as useDeleteClient } from "./useDeleteClient"
+export { default as useEditClient } from "./useEditClient"
+export { default as useGetClient } from "./useGetClient"

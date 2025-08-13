@@ -10,7 +10,7 @@ const useAddClient = () => {
   const addUser = async (params: ApiUser) => {
     try {
       setLoading(true)
-      const res = await createUser(params)
+      await createUser(params)
     } catch (error) {
       setError(error as Error)
     } finally {

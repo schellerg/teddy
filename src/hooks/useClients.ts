@@ -1,14 +1,14 @@
 import { useCallback, useContext, useEffect, useState } from "react"
-import { SelectedClientsContext } from "@contexts/SelectedClientsContext"
-import type { SelectedClientsContextType } from "@utils/types"
+import { SelectedClientsContext } from "@contexts"
+import type { Client, SelectedClientsContextType } from "@utils/types"
 
 import { listUsers } from "@api"
-import type { ApiListUsers, ApiListUsersParams } from "@utils/types"
+import type { ApiListUsersParams } from "@utils/types"
 
 const useClients = (params: ApiListUsersParams) => {
   const { selectedClients } = useContext(SelectedClientsContext) as SelectedClientsContextType
 
-  const [users, setUsers] = useState<ApiListUsers[]>([])
+  const [users, setUsers] = useState<Client[]>([])
   const [totalPages, setTotalPages] = useState<number>(1)
   const [loading, setLoading] = useState<boolean>(true)
   const [error, setError] = useState<Error | null>(null)

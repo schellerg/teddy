@@ -26,12 +26,12 @@
     /* Alias */
     "baseUrl": "./src",
     "paths": {
-      "@api/*": ["api/*"],
-      "@components/*": ["components/*"],
-      "@contexts/*": ["contexts/*"],
-      "@hooks/*": ["hooks/*"],
-      "@pages/*": ["pages/*"],
-      "@providers/*": ["providers/*"],
+      "@api": ["api"],
+      "@components": ["components"],
+      "@contexts": ["contexts"],
+      "@hooks": ["hooks"],
+      "@pages": ["pages"],
+      "@providers": ["providers"],
       "@utils/*": ["utils/*"]
     }
   },

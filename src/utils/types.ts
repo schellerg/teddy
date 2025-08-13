@@ -1,5 +1,6 @@
-import type { LucideIcon } from 'lucide-react'
 import React from 'react'
+import type { FieldError } from 'react-hook-form'
+import type { LucideIcon } from 'lucide-react'
 
 export interface ApiListUsersParams {
   page?: number
@@ -7,7 +8,7 @@ export interface ApiListUsersParams {
 }
 
 export interface ApiUser {
-  id?: number
+  id: number
   name: string
   salary: number
   companyValuation: number
@@ -30,7 +31,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   onClick?: () => void
 }
 
-export interface CardProps extends Client {
+export interface CardProps extends Omit<Client, "id" | "createdAt" | "updatedAt"> {
   actions?: React.ReactNode[]
 }
 
@@ -39,13 +40,15 @@ export interface Client {
   name: string
   salary: number
   companyValuation: number
+  createdAt: Date
+  updatedAt: Date
 }
 
-export interface ClientsList {
+export interface ClientsListProps {
   items: Client[]
   loading?: boolean
   error?: Error | null
-  renderActions?: (client: Client) => React.ReactNode
+  renderActions?: (client: Client) => React.ReactNode[]
 }
 
 export interface ClientModalFormData {
@@ -83,7 +86,7 @@ export interface ContainerProps {
 }
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  error?: boolean
+  error?: FieldError
   helperText?: string
   inputSize?: 'medium' | 'large'
 }

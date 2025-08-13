@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import type { Client } from "@utils/types";
-import { SelectedClientsContext } from "@contexts/SelectedClientsContext";
+import { SelectedClientsContext } from "@contexts";
 
 const SelectedClientsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [selectedClients, setSelectedClients] = useState<Client[]>([])
@@ -10,7 +10,9 @@ const SelectedClientsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
       id: client.id,
       name: client.name,
       salary: client.salary,
-      companyValuation: client.companyValuation
+      companyValuation: client.companyValuation,
+      createdAt: client.createdAt,
+      updatedAt: client.updatedAt
     }
     return setSelectedClients([...selectedClients, newClient])
   }

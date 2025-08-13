@@ -1,9 +1,9 @@
 import React from "react"
 
 import { Card, ErrorMessage } from "@components"
-import type { Client, ClientsList } from "@utils/types"
+import type { Client, ClientsListProps } from "@utils/types"
 
-const ClientsList: React.FC<ClientsList> = ({ items, loading, error, renderActions }) => {
+const ClientsList: React.FC<ClientsListProps> = ({ items, loading, error, renderActions }) => {
   /* TODO: Skeleton */
   if (loading)
     return <p>Carregando...</p>

@@ -1,6 +1,6 @@
 import { useContext } from "react"
 
-import { SelectedClientsContext } from "@contexts/SelectedClientsContext"
+import { SelectedClientsContext } from "@contexts"
 import type { Client, SelectedClientsContextType } from "@utils/types"
 
 import { Button, ClientsList, Container, Header } from "@components"

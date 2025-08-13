@@ -1,7 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
-import { SelectedClientsContext } from "@contexts/SelectedClientsContext"
+import { SelectedClientsContext } from "@contexts"
 import { ClientModalFormType, type Client, type SelectedClientsContextType } from "@utils/types"
 
 import { useClients } from "@hooks"
