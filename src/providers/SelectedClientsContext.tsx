@@ -3,31 +3,31 @@ import type { Client } from "@utils/types";
 import { SelectedClientsContext } from "@contexts/SelectedClientsContext";
 
 const SelectedClientsProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [clients, setClients] = useState<Client[]>([])
+  const [selectedClients, setSelectedClients] = useState<Client[]>([])
 
-  const addClient = (client: Client) => {
+  const addSelectedClient = (client: Client) => {
     const newClient: Client = {
       id: client.id,
       name: client.name,
       salary: client.salary,
       companyValuation: client.companyValuation
     }
-    setClients([...clients, newClient])
+    return setSelectedClients([...selectedClients, newClient])
   }
 
-  const removeClient = (id: number) => {
-    setClients(clients.filter(item => item.id !== id))
+  const removeSelectedClient = (id: number) => {
+    console.log(selectedClients.filter(item => item.id !== id))
+
+    setSelectedClients(selectedClients.filter(item => item.id !== id))
   }
 
-  const clearClients = () => {
-    setClients([])
+  const clearSelectedClients = () => {
+    setSelectedClients([])
   }
 
-  return <SelectedClientsContext.Provider value={{ clients, addClient, removeClient, clearClients }}>
+  return <SelectedClientsContext.Provider value={{ selectedClients, addSelectedClient, removeSelectedClient, clearSelectedClients }}>
     {children}
   </SelectedClientsContext.Provider>
 }
-
-
 
 export default SelectedClientsProvider

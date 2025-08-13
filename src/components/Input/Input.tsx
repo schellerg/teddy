@@ -3,7 +3,7 @@ import clsx from "clsx"
 
 import type { InputProps } from "@utils/types"
 
-const Input: React.FC<InputProps> = ({ inputSize = 'medium', error = 'false', helperText, onChange, ...props }) => {
+const Input: React.FC<InputProps> = ({ inputSize = 'medium', error = false, helperText, ...props }) => {
   return (
     <fieldset>
       <input
@@ -16,15 +16,11 @@ const Input: React.FC<InputProps> = ({ inputSize = 'medium', error = 'false', he
             },
           )
         }
-        id={props.id ?? 'generic-input'}
-        name={props.name ?? 'generic-input'}
         placeholder={props.placeholder ?? 'Digite aqui'}
-        required={props.required ?? false}
         type={props.type ?? 'text'}
-        onChange={onChange}
         {...props}
       />
-      {error && helperText?.length &&
+      {error && helperText &&
         <p className="text-red-500">{helperText}</p>
       }
     </fieldset>

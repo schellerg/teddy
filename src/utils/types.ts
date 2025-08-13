@@ -1,4 +1,5 @@
 import type { LucideIcon } from 'lucide-react'
+import React from 'react'
 
 export interface ApiListUsersParams {
   page?: number
@@ -6,10 +7,12 @@ export interface ApiListUsersParams {
 }
 
 export interface ApiUser {
-  id: number
+  id?: number
   name: string
   salary: number
   companyValuation: number
+  createdAt: Date
+  updatedAt: Date
 }
 export interface ApiListUsers {
   clients: Client[]
@@ -27,18 +30,8 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   onClick?: () => void
 }
 
-export const CardActionsType = {
-  SELECT: "select",
-  EDIT: "edit",
-  DELETE: "delete",
-} as const
-
-export type CardActionsType = typeof CardActionsType[keyof typeof CardActionsType]
-
-export interface CardProps {
-  client: Client
-  actions?: CardActionsType[]
-  onSelectClient: (id: number) => void
+export interface CardProps extends Client {
+  actions?: React.ReactNode[]
 }
 
 export interface Client {
@@ -52,13 +45,14 @@ export interface ClientsList {
   items: Client[]
   loading?: boolean
   error?: Error | null
-  actions?: CardActionsType[]
+  renderActions?: (client: Client) => React.ReactNode
 }
 
 export interface ClientModalFormData {
-  clientName: { error: boolean, value: string }
-  clientWage: { error: boolean, value: number | string }
-  companyValue: { error: boolean, value: number | string }
+  id?: number
+  name: string
+  salary: string
+  companyValuation: string
 }
 
 export const ClientModalFormType = {
@@ -70,15 +64,17 @@ export const ClientModalFormType = {
 export type ClientModalFormType = typeof ClientModalFormType[keyof typeof ClientModalFormType]
 
 export interface ClientModalFormProps {
-  formType: ClientModalFormType,
-  formData: ClientModalFormData,
-  handleChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+  title: string
+  client?: ClientModalFormData
+  loading: boolean
+  onSubmit: (data: ClientModalFormData) => void
 }
 
 export interface ClientModalProps {
   isOpen: boolean
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   formType: ClientModalFormType
+  client?: Client
 }
 
 export interface ContainerProps {
@@ -90,7 +86,6 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
   error?: boolean
   helperText?: string
   inputSize?: 'medium' | 'large'
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
 }
 
 export interface MenuItemProps {
@@ -125,8 +120,8 @@ export interface PaginationProps {
 }
 
 export interface SelectedClientsContextType {
-  clients: Client[]
-  addClient: (client: Client) => void
-  removeClient: (client: number) => void
-  clearClients: () => void
+  selectedClients: Client[]
+  addSelectedClient: (client: Client) => void
+  removeSelectedClient: (client: number) => void
+  clearSelectedClients: () => void
 }

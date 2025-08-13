@@ -1,14 +1,20 @@
-import { useEffect, useMemo, useState } from "react"
+import { useContext, useEffect, useMemo, useState } from "react"
 import { useSearchParams } from "react-router-dom"
+
+import { SelectedClientsContext } from "@contexts/SelectedClientsContext"
+import { ClientModalFormType, type Client, type SelectedClientsContextType } from "@utils/types"
+
 import { useClients } from "@hooks"
 
 import { Button, ClientModal, ClientsList, Container, Header, Pagination } from "@components"
-import { ClientModalFormType } from "@utils/types"
+import { Plus, Pencil, Trash2 } from "lucide-react"
 
 const Clients = () => {
+  /* TODO: abstract statements below to hooks */
   const [searchParams, setSearchParams] = useSearchParams()
   const pageParam = searchParams.get("page")
 
+  const iconSize = 18
   const pageOffset = [16, 32, 64]
 
   const [openClientModal, setOpenClientModal] = useState<boolean>(false)
@@ -20,6 +26,16 @@ const Clients = () => {
   const listParams = useMemo(() => ({ page: currentPage, limit }), [currentPage, limit])
 
   const { users, totalPages, loading, error } = useClients(listParams)
+  const { addSelectedClient } = useContext(SelectedClientsContext) as SelectedClientsContextType
+
+  const [currentUser, setCurrentUser] = useState<Client>()
+
+  const handleModal = (type: ClientModalFormType, user?: Client) => {
+    setOpenClientModal(true)
+    setClientModalType(type)
+    if (user)
+      setCurrentUser(user)
+  }
 
   const onPageChange = (page: number) => {
     return setSearchParams(`page=${page}`)
@@ -47,12 +63,21 @@ const Clients = () => {
                 value={limit}
                 onChange={(e) => setLimit(parseInt(e.target.value))}
               >
-                {pageOffset.map(item => <option>{item}</option>)}
+                {pageOffset.map(item => <option key={`page-offset-${item}`}>{item}</option>)}
               </select>
             </form>
           </div>
 
-          <ClientsList items={users} loading={loading} error={error} />
+          <ClientsList
+            items={users}
+            loading={loading}
+            error={error}
+            renderActions={(user: Client) => [
+              <Button icon={<Plus size={iconSize} />} onClick={() => addSelectedClient(user)} />,
+              <Button icon={<Pencil size={iconSize} />} onClick={() => handleModal(ClientModalFormType.EDIT, user)} />,
+              <Button icon={<Trash2 color='#ec6724' size={iconSize} />} onClick={() => handleModal(ClientModalFormType.DELETE, user)} />,
+            ]}
+          />
 
           <Button
             fullWidth
@@ -73,6 +98,7 @@ const Clients = () => {
             isOpen={openClientModal}
             setIsOpen={setOpenClientModal}
             formType={clientModalType}
+            client={currentUser}
           />
         </>
       </Container>

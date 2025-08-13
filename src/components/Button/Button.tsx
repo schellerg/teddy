@@ -14,7 +14,7 @@ const Button: React.FC<ButtonProps> = ({ fullWidth = false, icon, iconPosition =
 
   return (
     <button className={clsx(
-      'flex items-center justify-center font-bold rounded-sm cursor-pointer',
+      'flex items-center justify-center font-bold rounded-sm cursor-pointer disabled:bg-gray-400',
       fullWidth && 'w-full',
       iconStyle,
       {

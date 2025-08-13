@@ -1,49 +1,36 @@
-import React, { useState } from "react"
+import React from "react"
+
 import { ClientModalFormType } from "@utils/types"
-import type { ClientModalFormData, ClientModalProps } from "@utils/types"
+import type { ClientModalProps } from "@utils/types"
 
-import { Button, Modal } from "@components"
-import ClientModalForm from "./ClientModalForm"
+import { Modal } from "@components"
+import FormCreate from "./FormCreate"
+import FormEdit from "./FormEdit"
+import DeleteModal from "./DeleteModal"
 
-const ClientModal: React.FC<ClientModalProps> = ({ isOpen, setIsOpen, formType }) => {
-  const defaultState = {
-    clientName: { error: false, value: '' },
-    clientWage: { error: false, value: '' },
-    companyValue: { error: false, value: '' },
-  }
-
-  const [formData, setFormData] = useState<ClientModalFormData>(defaultState)
-
-  const defaultText = `${formType === ClientModalFormType.CREATE ? "Criar" : formType === ClientModalFormType.EDIT ? "Editar" : "Excluir"} cliente`
-
-  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target
-    setFormData((prevFormData) => ({
-      ...prevFormData,
-      [name]: { error: false, value }
-    }))
-  }
+const ClientModal: React.FC<ClientModalProps> = ({ isOpen, setIsOpen, formType, client }) => {
+  const defaultText = `${formType === ClientModalFormType.CREATE ?
+    "Criar" : formType === ClientModalFormType.EDIT ?
+      "Editar" : "Excluir"} cliente`
 
   const handleClose = () => {
-    setFormData(defaultState)
     setIsOpen(false)
   }
 
   return (
     <Modal
-      // key={`${ClientModalFormType}-${1}`}
       isOpen={isOpen}
       title={defaultText}
       onClose={() => handleClose()}>
       <div className="flex w-[360px] flex-col max-w-full gap-4">
-        {formType === ClientModalFormType.DELETE &&
-          <>
-            <p className="text-left">Você está prestes a excluir o cliente: <span className="font-bold">{formData.clientName.value}</span></p>
-            <Button fullWidth label={defaultText} variant="filled" onClick={() => { }} />
-          </>
+        {formType === ClientModalFormType.DELETE && client &&
+          <DeleteModal client={client} onClose={handleClose} />
         }
-        {formType !== ClientModalFormType.DELETE &&
-          <ClientModalForm formType={formType} formData={formData} handleChange={handleChange} />
+        {formType === ClientModalFormType.CREATE &&
+          <FormCreate onClose={handleClose} />
+        }
+        {formType === ClientModalFormType.EDIT && client &&
+          <FormEdit client={client} onClose={handleClose} />
         }
       </div>
     </Modal>

@@ -1,5 +1,7 @@
-const ErrorMessage = (message: string) => {
-  return <p className="text-center p-4 rounded-sm bg-amber-200">{message}</p>
+import React from "react"
+
+const ErrorMessage: React.FC<{ message: string }> = ({ message }) => {
+  return <p className="w-full text-center p-4 mt-4 rounded-sm bg-amber-100">{message}</p>
 }
 
 export default ErrorMessage

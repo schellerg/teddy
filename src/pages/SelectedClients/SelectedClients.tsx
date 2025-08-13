@@ -1,11 +1,13 @@
 import { useContext } from "react"
 
-import { Button, ClientsList, Container, Header } from "@components"
-import { type SelectedClientsContextType } from "@utils/types"
 import { SelectedClientsContext } from "@contexts/SelectedClientsContext"
+import type { Client, SelectedClientsContextType } from "@utils/types"
+
+import { Button, ClientsList, Container, Header } from "@components"
+import { Minus } from "lucide-react"
 
 const SelectedClients = () => {
-  const { clients, removeClient, clearClients } = useContext(SelectedClientsContext) as SelectedClientsContextType
+  const { selectedClients, removeSelectedClient, clearSelectedClients } = useContext(SelectedClientsContext) as SelectedClientsContextType
 
   return (
     <>
@@ -13,17 +15,24 @@ const SelectedClients = () => {
 
       <Container className="flex-col mt-8">
         <>
-          <h1 className="flex flex-wrap w-full text-sm lg:text-[18px]">
+          <h1 className="flex flex-wrap w-full font-bold text-sm lg:text-[22px]">
             Clientes selecionados:
           </h1>
 
-          <ClientsList items={clients} loading={false} error={null} />
+          <ClientsList
+            items={selectedClients}
+            loading={false}
+            error={null}
+            renderActions={(client: Client) => [
+              <Button icon={<Minus color='#ec6724' size={18} />} onClick={() => removeSelectedClient(client.id)} />
+            ]}
+          />
 
-          {clients.length > 1 &&
+          {selectedClients.length > 0 &&
             <Button
               fullWidth
               label="Limpar clientes selecionados"
-              onClick={clearClients}
+              onClick={clearSelectedClients}
             />
           }
         </>
