@@ -1,13 +1,13 @@
 import { useContext, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
-import { SelectedClientsContext } from "@contexts"
-import { ClientModalFormType, type Client, type SelectedClientsContextType } from "@utils/types"
-
 import { useClients } from "@hooks"
+import { offsetOptions, PaginationContext, SelectedClientsContext } from "@contexts"
+import { ClientModalFormType, type Client, type SelectedClientsContextType } from "@utils/types"
 
 import { Button, ClientModal, ClientsList, Container, Header, Pagination } from "@components"
 import { Plus, Pencil, Trash2 } from "lucide-react"
+
 
 const Clients = () => {
   /* TODO: abstract statements below to hooks */
@@ -15,16 +15,13 @@ const Clients = () => {
   const pageParam = searchParams.get("page")
 
   const iconSize = 18
-  const pageOffset = [16, 32, 64]
 
   const [openClientModal, setOpenClientModal] = useState<boolean>(false)
   const [clientModalType, setClientModalType] = useState<ClientModalFormType>(ClientModalFormType.CREATE)
 
-  const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam || "") || 1)
-  const [limit, setLimit] = useState<number>(pageOffset[0])
-
-  const { users, totalPages, loading, error, refetch } = useClients({ page: currentPage, limit })
   const { addSelectedClient } = useContext(SelectedClientsContext) as SelectedClientsContextType
+  const { page, setPage, limit, setLimit } = useContext(PaginationContext)
+  const { users, totalPages, loading, error, refetch } = useClients({ page, limit })
 
   const [currentUser, setCurrentUser] = useState<Client>()
 
@@ -41,7 +38,7 @@ const Clients = () => {
 
   useEffect(() => {
     if (pageParam)
-      setCurrentPage(parseInt(pageParam))
+      setPage(parseInt(pageParam))
   }, [searchParams, pageParam])
 
   return (
@@ -59,9 +56,12 @@ const Clients = () => {
                 id="page-offset"
                 name="page-offset"
                 value={limit}
-                onChange={(e) => setLimit(parseInt(e.target.value))}
+                onChange={(e) => {
+                  setLimit(parseInt(e.target.value))
+                  setSearchParams("?page=1")
+                }}
               >
-                {pageOffset.map(item => <option key={`page-offset-${item}`}>{item}</option>)}
+                {offsetOptions.map(item => <option key={`page-offset-${item}`}>{item}</option>)}
               </select>
             </form>
           </div>
@@ -88,7 +88,7 @@ const Clients = () => {
 
           <Pagination
             totalPages={totalPages}
-            currentPage={currentPage}
+            currentPage={page}
             onPageChange={onPageChange}
           />
 

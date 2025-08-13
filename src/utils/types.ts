@@ -124,6 +124,13 @@ export interface PaginationProps {
   onPageChange: (page: number) => void
 }
 
+export type PaginationContextType = {
+  page: number
+  limit: number,
+  setPage: (page: number) => void,
+  setLimit: (offset: number) => void,
+}
+
 export interface SelectedClientsContextType {
   selectedClients: Client[]
   addSelectedClient: (client: Client) => void

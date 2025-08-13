@@ -18,8 +18,6 @@ const SelectedClientsProvider: React.FC<{ children: React.ReactNode }> = ({ chil
   }
 
   const removeSelectedClient = (id: number) => {
-    console.log(selectedClients.filter(item => item.id !== id))
-
     setSelectedClients(selectedClients.filter(item => item.id !== id))
   }
 

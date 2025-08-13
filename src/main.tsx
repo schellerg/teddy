@@ -6,18 +6,20 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom'
 
 import App from './App.tsx'
 import { Clients, SelectedClients } from "@pages"
-import { SelectedClientsProvider } from "@providers"
+import { PaginationProvider, SelectedClientsProvider } from "@providers"
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <SelectedClientsProvider>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />} />
-          <Route path="/clientes" element={<Clients />} />
-          <Route path="/clientes-selecionados" element={<SelectedClients />} />
-        </Routes>
-      </BrowserRouter>
+      <PaginationProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<App />} />
+            <Route path="/clientes" element={<Clients />} />
+            <Route path="/clientes-selecionados" element={<SelectedClients />} />
+          </Routes>
+        </BrowserRouter>
+      </PaginationProvider>
     </SelectedClientsProvider>
   </StrictMode>,
 )
