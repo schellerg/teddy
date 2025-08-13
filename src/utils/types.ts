@@ -51,8 +51,8 @@ export interface ClientsList {
 export interface ClientModalFormData {
   id?: number
   name: string
-  salary: string
-  companyValuation: string
+  salary: number
+  companyValuation: number
 }
 
 export const ClientModalFormType = {

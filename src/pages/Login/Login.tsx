@@ -1,14 +1,29 @@
-import React, { useEffect, useState } from "react"
+import { useEffect } from "react"
 
+import { useForm } from "react-hook-form"
 import { useNavigate } from "react-router-dom"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { loginSchema } from "@utils/schemas"
 
 import { Button, Input } from "@components"
 
+type LoginData = {
+  username: string
+}
+
 function Login() {
   const router = useNavigate()
-  const [userName, setUserName] = useState<string>("")
-  const [error, setError] = useState<boolean>(false)
-  const [errorMessage, setErrorMessage] = useState<string>("")
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginData>({
+    defaultValues: {
+      username: '',
+    },
+    resolver: yupResolver(loginSchema),
+  })
 
   useEffect(() => {
     const currentUser = localStorage.getItem("username")
@@ -18,16 +33,8 @@ function Login() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
-  const onSubmit = (event: React.SyntheticEvent) => {
-    event.preventDefault()
-
-    if (!userName.length) {
-      setError(true)
-      setErrorMessage("Preencha o nome")
-      return
-    }
-
-    localStorage.setItem("username", userName)
+  const onSubmit = (data: LoginData) => {
+    localStorage.setItem("username", data.username)
     return router("/clientes")
   }
 
@@ -36,17 +43,13 @@ function Login() {
       <form className="flex flex-col w-full sm:w-[520px] gap-4" action="#" method="POST">
         <h1 className="text-4xl font-normal text-center">Olá, seja bem-vindo!</h1>
         <Input
-          error={error}
-          id="userName"
+          {...register("username")}
+          error={errors.username}
           inputSize="large"
-          maxLength={50}
-          name="userName"
           placeholder="Digite o seu nome:"
-          helperText={errorMessage}
-          required
-          onChange={(e) => setUserName(e.target.value)}
+          helperText={errors.username?.message}
         />
-        <Button fullWidth label="Entrar" size="large" variant="filled" onClick={onSubmit} />
+        <Button fullWidth label="Entrar" size="large" variant="filled" onClick={handleSubmit(onSubmit)} />
       </form>
     </main>
   )

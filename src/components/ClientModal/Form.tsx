@@ -1,5 +1,8 @@
 import type React from "react"
+
 import { useForm } from "react-hook-form"
+import { yupResolver } from "@hookform/resolvers/yup"
+import { clientFormSchema } from "@utils/schemas"
 
 import type { ClientModalFormData, ClientModalFormProps } from "@utils/types"
 
@@ -16,7 +19,8 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, onSubmit
       name: client?.name,
       salary: client?.salary,
       companyValuation: client?.companyValuation
-    }
+    },
+    resolver: yupResolver(clientFormSchema)
   })
 
   const submitHandler = (data: ClientModalFormData) => {
