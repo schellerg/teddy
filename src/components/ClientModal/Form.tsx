@@ -6,9 +6,9 @@ import { clientFormSchema } from "@utils/schemas"
 
 import type { ClientModalFormData, ClientModalFormProps } from "@utils/types"
 
-import { Button, Input } from "@components"
+import { Button, ErrorMessage, Input } from "@components"
 
-const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, onSubmit }) => {
+const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, onSubmit }) => {
   const {
     register,
     handleSubmit,
@@ -52,6 +52,10 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, onSubmit
         placeholder="Digite o valor da empresa:"
         type="tel"
       />
+
+      {error &&
+        <ErrorMessage message={error.message} />
+      }
 
       <Button
         disabled={loading}

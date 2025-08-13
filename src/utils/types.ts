@@ -70,6 +70,7 @@ export interface ClientModalFormProps {
   title: string
   client?: ClientModalFormData
   loading: boolean
+  error?: Error | null
   onSubmit: (data: ClientModalFormData) => void
 }
 

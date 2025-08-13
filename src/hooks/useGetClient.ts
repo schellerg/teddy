@@ -5,6 +5,7 @@ import { getUser } from "@api"
 
 const useGetClient = (clientId: number) => {
   const [client, setClient] = useState<Client>()
+  const [error, setError] = useState<Error | null>(null)
   const [loading, setLoading] = useState<boolean>(false)
 
   const getClient = useCallback(
@@ -14,7 +15,7 @@ const useGetClient = (clientId: number) => {
         const res = await getUser(clientId)
         setClient(res)
       } catch (error) {
-        console.log(error)
+        setError(error as Error)
       } finally {
         setLoading(false)
       }
@@ -24,7 +25,7 @@ const useGetClient = (clientId: number) => {
     getClient()
   }, [getClient])
 
-  return { client, loading }
+  return { client, loading, error }
 }
 
 export default useGetClient

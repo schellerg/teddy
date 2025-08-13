@@ -9,7 +9,7 @@ type Props = {
 }
 
 const FormEdit = ({ client, onClose }: Props) => {
-  const { client: clientData, loading, error } = useGetClient(client.id)
+  const { client: clientData, loading, error: getClientError } = useGetClient(client.id)
   const { updateClient, loading: updateLoading, error: updateError } = useEditClient()
 
   const onSubmit = async (data: ClientModalFormData) => {
@@ -28,7 +28,7 @@ const FormEdit = ({ client, onClose }: Props) => {
     return <div>Carregando...</div>
   }
 
-  return <Form title="Editar cliente" client={clientData} loading={updateLoading} onSubmit={onSubmit} />
+  return <Form title="Editar cliente" client={clientData} loading={updateLoading} error={getClientError || updateError} onSubmit={onSubmit} />
 }
 
 export default FormEdit

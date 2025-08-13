@@ -21,7 +21,7 @@ const FormCreate = ({ onClose }: Props) => {
     onClose()
   }
 
-  return <Form title="Criar cliente" loading={loading} onSubmit={onSubmit} />
+  return <Form title="Criar cliente" loading={loading} error={error} onSubmit={onSubmit} />
 }
 
 export default FormCreate
