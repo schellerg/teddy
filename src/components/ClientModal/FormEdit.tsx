@@ -6,9 +6,10 @@ import Form from "./Form"
 type Props = {
   client: Client
   onClose: () => void
+  refetch: () => Promise<void>
 }
 
-const FormEdit = ({ client, onClose }: Props) => {
+const FormEdit = ({ client, onClose, refetch }: Props) => {
   const { client: clientData, loading, error: getClientError } = useGetClient(client.id)
   const { updateClient, loading: updateLoading, error: updateError } = useEditClient()
 
@@ -21,6 +22,7 @@ const FormEdit = ({ client, onClose }: Props) => {
     } as ApiUser
 
     await updateClient(formatData)
+    refetch()
     onClose()
   }
 

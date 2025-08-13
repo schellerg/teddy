@@ -79,6 +79,7 @@ export interface ClientModalProps {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>
   formType: ClientModalFormType
   client?: Client
+  refetch: () => Promise<void>
 }
 
 export interface ContainerProps {

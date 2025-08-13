@@ -5,9 +5,10 @@ import Form from "./Form"
 
 type Props = {
   onClose: () => void
+  refetch: () => Promise<void>
 }
 
-const FormCreate = ({ onClose }: Props) => {
+const FormCreate = ({ onClose, refetch }: Props) => {
   const { addUser, loading, error } = useAddClient()
 
   const onSubmit = async (data: ClientModalFormData) => {
@@ -18,6 +19,7 @@ const FormCreate = ({ onClose }: Props) => {
     } as ApiUser
 
     await addUser(formatData)
+    refetch()
     onClose()
   }
 

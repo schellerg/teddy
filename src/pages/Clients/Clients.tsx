@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo, useState } from "react"
+import { useContext, useEffect, useState } from "react"
 import { useSearchParams } from "react-router-dom"
 
 import { SelectedClientsContext } from "@contexts"
@@ -23,9 +23,7 @@ const Clients = () => {
   const [currentPage, setCurrentPage] = useState<number>(parseInt(pageParam || "") || 1)
   const [limit, setLimit] = useState<number>(pageOffset[0])
 
-  const listParams = useMemo(() => ({ page: currentPage, limit }), [currentPage, limit])
-
-  const { users, totalPages, loading, error } = useClients(listParams)
+  const { users, totalPages, loading, error, refetch } = useClients({ page: currentPage, limit })
   const { addSelectedClient } = useContext(SelectedClientsContext) as SelectedClientsContextType
 
   const [currentUser, setCurrentUser] = useState<Client>()
@@ -99,6 +97,7 @@ const Clients = () => {
             setIsOpen={setOpenClientModal}
             formType={clientModalType}
             client={currentUser}
+            refetch={refetch}
           />
         </>
       </Container>

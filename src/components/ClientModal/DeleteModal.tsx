@@ -5,14 +5,16 @@ import { Button } from "@components"
 type Props = {
   client: Client
   onClose: () => void
+  refetch: () => Promise<void>
 }
 
-const DeleteModal = ({ client, onClose }: Props) => {
+const DeleteModal = ({ client, onClose, refetch }: Props) => {
   const { deleteClient, loading } = useDeleteClient()
 
   const onSubmit = async () => {
     if (client.id) {
       await deleteClient(client.id)
+      refetch()
       onClose()
     }
   }

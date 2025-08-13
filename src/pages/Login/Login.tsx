@@ -40,8 +40,8 @@ function Login() {
 
   return (
     <main className="flex min-h-full items-center justify-center">
-      <form className="flex flex-col w-full sm:w-[520px] gap-4" action="#" method="POST">
-        <h1 className="text-4xl font-normal text-center">Olá, seja bem-vindo!</h1>
+      <form className="flex flex-col mx-4 w-full sm:w-[520px] gap-4" action="#" method="POST">
+        <h1 className="text-lg sm:text-4xl font-normal text-center">Olá, seja bem-vindo!</h1>
         <Input
           {...register("username")}
           error={errors.username}

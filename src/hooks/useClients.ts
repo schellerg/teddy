@@ -5,7 +5,7 @@ import type { Client, SelectedClientsContextType } from "@utils/types"
 import { listUsers } from "@api"
 import type { ApiListUsersParams } from "@utils/types"
 
-const useClients = (params: ApiListUsersParams) => {
+const useClients = ({ page, limit }: ApiListUsersParams) => {
   const { selectedClients } = useContext(SelectedClientsContext) as SelectedClientsContextType
 
   const [users, setUsers] = useState<Client[]>([])
@@ -15,11 +15,11 @@ const useClients = (params: ApiListUsersParams) => {
 
   const fetchData = useCallback(async () => {
     try {
-      const res = await listUsers(params)
+      const res = await listUsers({ page, limit })
       const alreadySelected = new Set(selectedClients.map(item => item.id))
-      const filtedClients = res.clients.filter(client => !alreadySelected.has(client.id))
+      const filteredClients = res.clients.filter(client => !alreadySelected.has(client.id))
 
-      setUsers(filtedClients.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()))
+      setUsers(filteredClients.sort((a, b) => new Date(b.updatedAt).getTime() - new Date(a.updatedAt).getTime()))
       setTotalPages(res.totalPages)
       setError(null)
     } catch (error) {
@@ -27,7 +27,7 @@ const useClients = (params: ApiListUsersParams) => {
     } finally {
       setLoading(false)
     }
-  }, [params, selectedClients])
+  }, [page, limit, selectedClients])
 
   useEffect(() => {
     fetchData()
