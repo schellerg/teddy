@@ -21,6 +21,7 @@ const ClientsList: React.FC<ClientsListProps> = ({ items, loading, error, render
           items.map(
             (item: Client) => (
               <Card
+                id={item.id}
                 key={item.id}
                 name={item.name}
                 salary={item.salary}

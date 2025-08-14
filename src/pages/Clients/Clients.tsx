@@ -10,12 +10,13 @@ import { Plus, Pencil, Trash2 } from "lucide-react"
 
 
 const Clients = () => {
-  /* TODO: abstract statements below to hooks */
+  // TODO: abstract statements below to hooks
   const [searchParams, setSearchParams] = useSearchParams()
   const pageParam = searchParams.get("page")
 
   const iconSize = 18
 
+  // TODO Create context/provider to control modals
   const [openClientModal, setOpenClientModal] = useState<boolean>(false)
   const [clientModalType, setClientModalType] = useState<ClientModalFormType>(ClientModalFormType.CREATE)
 
@@ -71,9 +72,9 @@ const Clients = () => {
             loading={loading}
             error={error}
             renderActions={(user: Client) => [
-              <Button icon={<Plus size={iconSize} />} onClick={() => addSelectedClient(user)} />,
-              <Button icon={<Pencil size={iconSize} />} onClick={() => handleModal(ClientModalFormType.EDIT, user)} />,
-              <Button icon={<Trash2 color='#ec6724' size={iconSize} />} onClick={() => handleModal(ClientModalFormType.DELETE, user)} />,
+              <Button key={`select-client-${user.id}`} icon={<Plus size={iconSize} />} onClick={() => addSelectedClient(user)} />,
+              <Button key={`edit-client-${user.id}`} icon={<Pencil size={iconSize} />} onClick={() => handleModal(ClientModalFormType.EDIT, user)} />,
+              <Button key={`delete-client-${user.id}`} icon={<Trash2 color='#ec6724' size={iconSize} />} onClick={() => handleModal(ClientModalFormType.DELETE, user)} />,
             ]}
           />
 

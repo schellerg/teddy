@@ -31,7 +31,7 @@ export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElemen
   onClick?: () => void
 }
 
-export interface CardProps extends Omit<Client, "id" | "createdAt" | "updatedAt"> {
+export interface CardProps extends Omit<Client, "createdAt" | "updatedAt"> {
   actions?: React.ReactNode[]
 }
 
