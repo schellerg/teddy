@@ -25,7 +25,8 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
 
   const submitHandler = (data: ClientModalFormData) => {
     onSubmit(data)
-    reset()
+    if (!client)
+      reset()
   }
 
   return (
