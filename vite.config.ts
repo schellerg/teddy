@@ -20,5 +20,9 @@ export default defineConfig({
       '@providers': path.resolve(__dirname, 'src/providers/'),
       '@utils': path.resolve(__dirname, 'src/utils/'),
     }
+  },
+  server: {
+    host: '0.0.0.0', // permite acesso de fora do container
+    port: 5173,
   }
 })

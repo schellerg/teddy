@@ -11,7 +11,7 @@ clientes selecionados.
 - [x] React + Vite
 - [ ] Micro-frontends
 - [x] Responsivo
-- [ ] Docker
+- [x] Docker
 - [x] [Deploy na Vercel](https://teddy-dun.vercel.app/)
 - [x] README
 - [x] [Vídeo demonstrativo](https://youtu.be/iIVlRiMKfI0)
@@ -24,7 +24,19 @@ clientes selecionados.
 
 ## Instruções
 
-Instale as dependências e rode o projeto: `npm run dev` ou acesse este [link](https://teddy-dun.vercel.app/)
+1. Local
+
+- Clone o repositório, instale as dependências e rode o projeto `npm run dev`
+- Acesse [localhost:5173](http://localhost:5173/)
+
+2. Docker
+
+- Rode o comando `docker compose up vite-dev` para desenvolvimento ou com a flag `vite-prd` para buildar
+- Acesso [localhost:3000](http://localhost:3000/)
+
+3. Vercel
+
+- Acesse este [link](https://teddy-dun.vercel.app/)
 
 ## Informações
 
