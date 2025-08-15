@@ -14,7 +14,7 @@ clientes selecionados.
 - [ ] Docker
 - [x] [Deploy na Vercel](https://teddy-dun.vercel.app/)
 - [x] README
-- [ ] Vídeo demonstrativo
+- [x] [Vídeo demonstrativo](https://youtu.be/iIVlRiMKfI0)
 
 ## Diferenciais
 

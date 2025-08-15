@@ -38,8 +38,6 @@ export const createUser = async (params: ApiUser): Promise<ApiUser> => {
 }
 
 export const deleteUser = async (params: number) => {
-  console.log('deleteUser', params)
-
   const response = await api.delete(`/users/${params}`)
 
   return response.data
