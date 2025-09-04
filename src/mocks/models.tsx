@@ -38,3 +38,10 @@ export const clientsListMock = [
 ]
 
 export const clientMock = clientsListMock[randomPosition(clientsListMock.length)]
+
+
+export const modalFakeProps = {
+  isOpen: true,
+  setIsOpen: vi.fn(),
+  refetch: vi.fn(),
+}

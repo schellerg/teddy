@@ -27,7 +27,7 @@ const FormEdit = ({ client, onClose, refetch }: Props) => {
   }
 
   if (loading) {
-    return <div>Carregando...</div>
+    return <div data-testid="loading-form">Carregando...</div>
   }
 
   return <Form title="Editar cliente" client={clientData} loading={updateLoading} error={getClientError || updateError} onSubmit={onSubmit} />

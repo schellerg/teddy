@@ -36,6 +36,7 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
         error={errors.name}
         helperText={errors.name?.message}
         placeholder="Digite o nome:"
+        data-testid="client-form-name-input"
       />
 
       <Input
@@ -44,6 +45,7 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
         helperText={errors.salary?.message}
         placeholder="Digite o salário:"
         type="tel"
+        data-testid="client-form-salary-input"
       />
 
       <Input
@@ -52,6 +54,7 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
         helperText={errors.companyValuation?.message}
         placeholder="Digite o valor da empresa:"
         type="tel"
+        data-testid="client-form-company-valuation-input"
       />
 
       {error &&

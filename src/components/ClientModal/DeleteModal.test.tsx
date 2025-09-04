@@ -4,7 +4,7 @@ import { ClientModalFormType } from "@utils/types"
 import { ClientModal } from "@components"
 import { clientMock } from "@mocks/models"
 
-describe("Client Modal", () => {
+describe("Client Delete Modal", () => {
   const modalFakeProps = {
     isOpen: true,
     setIsOpen: vi.fn(),

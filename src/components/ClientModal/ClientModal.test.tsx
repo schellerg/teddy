@@ -2,15 +2,9 @@ import { describe, it, expect } from "vitest"
 import { render, screen } from "@test/utils"
 import { ClientModalFormType } from "@utils/types"
 import { ClientModal } from "@components"
-import { clientMock } from "@mocks/models"
+import { clientMock, modalFakeProps } from "@mocks/models"
 
 describe("Client Modal", () => {
-  const modalFakeProps = {
-    isOpen: true,
-    setIsOpen: vi.fn(),
-    refetch: vi.fn(),
-  }
-
   const testCases = [
     {
       label: "deletion",
