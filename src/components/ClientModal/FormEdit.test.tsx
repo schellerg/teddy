@@ -38,7 +38,6 @@ describe("Client Form Edit", () => {
 
     await userEvent.click(submitButton)
 
-    screen.debug()
     expect(submitButton).toHaveTextContent(/salvando/i)
   })
 })

@@ -13,6 +13,6 @@ describe("Client Modal", () => {
   it("Render form with an error message", async () => {
     render(<Form {...modalFakeProps} />)
 
-    expect(screen.getByTestId("client-form-error-message")).toBeInTheDocument()
+    expect(screen.getByTestId("generic-error-message")).toBeInTheDocument()
   })
 })

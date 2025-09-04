@@ -45,7 +45,11 @@ const Header = () => {
     <>
       <header className="py-3 sm:py-6 shadow-custom-sm">
         <Container className="lg:justify-between">
-          <Button icon={<MenuIcon />} onClick={() => setMenuOpen(true)} />
+          <Button
+            icon={<MenuIcon />}
+            onClick={() => setMenuOpen(true)}
+            data-testid="header-menu-button"
+          />
 
           <img className="ml-2 w-20 sm:w-24 lg:mr-auto" src="/images/logo-teddy.png" alt="Logo Teddy" />
 
