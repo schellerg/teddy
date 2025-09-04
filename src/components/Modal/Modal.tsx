@@ -44,7 +44,7 @@ const Modal: React.FC<ModalProps> = ({
         <>
           <header className="flex items-center justify-between mb-3">
             <p className="font-bold">{title}</p>
-            <a className='cursor-pointer' title='Fechar modal' onClick={handleClose}>
+            <a className='cursor-pointer' title='Fechar modal' onClick={handleClose} data-testid="close-modal-button">
               <X size={20} />
             </a>
           </header>

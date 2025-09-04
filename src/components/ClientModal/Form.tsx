@@ -30,7 +30,7 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
   }
 
   return (
-    <form className="flex flex-col w-full gap-3" method="POST">
+    <form className="flex flex-col w-full gap-3" method="POST" data-testid="client-form">
       <Input
         {...register("name", { required: "Campo obrigatório", maxLength: 50 })}
         error={errors.name}
@@ -63,6 +63,7 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
         label={!loading ? title : 'Salvando...'}
         variant="filled"
         onClick={handleSubmit(submitHandler)}
+        data-testid="client-form-submit-button"
       />
     </form>
   )
