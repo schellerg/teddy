@@ -13,7 +13,7 @@ const Modal: React.FC<ModalProps> = ({
   const modalRef = useRef<HTMLDialogElement | null>(null)
 
   const handleClose = () => {
-    if (onClose) onClose()
+    onClose?.()
   }
 
   const handleEscape = (event: React.KeyboardEvent<HTMLDialogElement>) => {

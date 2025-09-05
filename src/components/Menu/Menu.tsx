@@ -30,6 +30,7 @@ const Menu: React.FC<MenuProps> = ({ items, isMenuOpen, onClose }) => {
             className='absolute flex items-center justify-center w-[45px] h-[45px] rounded-full right-[-22.5px] bottom-[-22.5px] cursor-pointer bg-black'
             title='Recolher menu'
             onClick={() => handleClose()}
+            data-testid="close-menu-button"
           >
             <CircleArrowLeft fill="white" />
           </a>

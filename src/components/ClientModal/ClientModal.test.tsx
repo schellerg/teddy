@@ -11,11 +11,11 @@ describe("Client Modal", () => {
       props: { client: clientMock, ...modalFakeProps, formType: ClientModalFormType.DELETE }
     },
     {
-      label: "creation modal",
+      label: "creation",
       props: { ...modalFakeProps, formType: ClientModalFormType.CREATE }
     },
     {
-      label: "edition modal",
+      label: "edition",
       props: { client: clientMock, ...modalFakeProps, formType: ClientModalFormType.EDIT }
     }
   ] as const
