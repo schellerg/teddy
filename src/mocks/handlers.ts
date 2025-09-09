@@ -1,9 +1,14 @@
 import { http, HttpResponse, delay } from 'msw'
-import { clientMock } from '@mocks/models'
+import { clientMock, clientsListMock } from '@mocks/models'
 
 const BASE_URL = "https://boasorte.teddybackoffice.com.br"
 
 export const handlers = [
+  http.get(`${BASE_URL}/users`, async () => {
+    await delay()
+    return HttpResponse.json(clientsListMock)
+  }),
+
   http.get(`${BASE_URL}/users/:id`, async () => {
     await delay()
     return HttpResponse.json(clientMock)
