@@ -20,7 +20,7 @@ clientes selecionados.
 
 - [ ] Testes E2E
 - [ ] Micro-frontends para design system
-- [ ] Testes unitários
+- [x] Testes unitários
 
 ## Instruções
 
