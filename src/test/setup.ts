@@ -6,6 +6,14 @@ import { server } from "@mocks/node"
 
 expect.extend(matchers)
 
+if (typeof (globalThis as any).ProgressEvent === "undefined") {
+  (globalThis as any).ProgressEvent = class ProgressEvent extends Event {
+    constructor(type: string, init?: EventInit) {
+      super(type, init)
+    }
+  }
+}
+
 beforeEach(() => {
   HTMLDialogElement.prototype.showModal = function () {
     this.open = true
