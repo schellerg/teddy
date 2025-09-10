@@ -6,13 +6,13 @@ import type { Client, ClientsListProps } from "@utils/types"
 const ClientsList: React.FC<ClientsListProps> = ({ items, loading, error, renderActions }) => {
   /* TODO: Skeleton */
   if (loading)
-    return <p>Carregando...</p>
+    return <p data-testid="clients-list-loading">Carregando...</p>
 
   if (error)
     return <ErrorMessage message={error.message} />
 
   if (!items?.length)
-    return <p className="mt-4">Nenhum resultado encontrado.</p>
+    return <p className="mt-4" data-testid="clients-list-empty-results">Nenhum resultado encontrado.</p>
 
   return (
     <>

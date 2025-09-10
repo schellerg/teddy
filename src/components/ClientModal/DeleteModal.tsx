@@ -21,11 +21,18 @@ const DeleteModal = ({ client, onClose, refetch }: Props) => {
 
   return (
     <>
-      <p className="text-left">
+      <p className="text-left" data-testid="deletion-text-display">
         Você está prestes a excluir o cliente:{" "}
-        <span className="font-bold">{client.name}</span>
+        <span className="font-bold" data-testid="deletion-client-name-display">{client.name}</span>
       </p>
-      <Button disabled={loading} fullWidth label="Excluir cliente" variant="filled" onClick={onSubmit} />
+      <Button
+        disabled={loading}
+        fullWidth
+        label="Excluir cliente"
+        variant="filled"
+        onClick={onSubmit}
+        data-testid="deletion-modal-submit-button"
+      />
     </>)
 }
 

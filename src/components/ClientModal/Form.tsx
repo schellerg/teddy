@@ -30,12 +30,13 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
   }
 
   return (
-    <form className="flex flex-col w-full gap-3" method="POST">
+    <form className="flex flex-col w-full gap-3" method="POST" data-testid="client-form">
       <Input
         {...register("name", { required: "Campo obrigatório", maxLength: 50 })}
         error={errors.name}
         helperText={errors.name?.message}
         placeholder="Digite o nome:"
+        data-testid="client-form-name-input"
       />
 
       <Input
@@ -44,6 +45,7 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
         helperText={errors.salary?.message}
         placeholder="Digite o salário:"
         type="tel"
+        data-testid="client-form-salary-input"
       />
 
       <Input
@@ -52,6 +54,7 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
         helperText={errors.companyValuation?.message}
         placeholder="Digite o valor da empresa:"
         type="tel"
+        data-testid="client-form-company-valuation-input"
       />
 
       {error &&
@@ -63,6 +66,7 @@ const Form: React.FC<ClientModalFormProps> = ({ title, client, loading, error, o
         label={!loading ? title : 'Salvando...'}
         variant="filled"
         onClick={handleSubmit(submitHandler)}
+        data-testid="client-form-submit-button"
       />
     </form>
   )
