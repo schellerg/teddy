@@ -1,14 +1,21 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { Home, MenuIcon, User, UserStar } from "lucide-react"
 
 import { Button, Container, Menu, Navigation } from "@components"
 
 const Header = () => {
-  const [openMenu, setMenuOpen] = useState<boolean>(false)
-
   const navigate = useNavigate()
-  const username = localStorage.getItem("username")
+
+  const [openMenu, setMenuOpen] = useState<boolean>(false)
+  const [username, setUsername] = useState<string | null>(null)
+
+  useEffect(() => {
+    const name = localStorage.getItem("username")
+
+    if (name)
+      setUsername(name)
+  }, [])
 
   const logout = () => {
     localStorage.removeItem("username")
